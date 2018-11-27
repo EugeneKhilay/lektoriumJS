@@ -1,5 +1,5 @@
 // Pits
-let pits = [2, 1, 5, 0, 3, 4, 7, 2, 3, 7, 0];
+let pits = [2, 1, 5, 0, 3, 4, 7, 2, 3, 1, 0];
 
 function findMax(arr) {
   let maxElement = {};
@@ -15,33 +15,41 @@ function findMax(arr) {
 }
 
 function getWater(arr, callback) {
-  let highest = callback.value;
   let water = 0;
   let curMax = arr[0];
   let leftToRight = true;
+  let rightToLeft = true;
   callback = callback(arr);
-  console.log('max ',curMax);
   arr.forEach(function(value, key) {
-    if (leftToRight) {
-      if ( curMax > arr[key + 1]) {
-        water += curMax - arr[key + 1];
-        console.log(key, ' ', water);
-      } else if ( callback.key !== key + 1 ) {
-        curMax = arr[key + 1];
-        console.log('max ',curMax);
+    if ( leftToRight ) {
+      if ( callback.key !== key ) {
+        if ( curMax > arr[key + 1] ) {
+          water += curMax - arr[key + 1];
+          console.log(key, ' ', water);
+        } else if ( callback.key !== key + 1 ) {
+          curMax = arr[key + 1];
+        }
       } else {
         leftToRight = false;
-        console.log('water ', water);
         return water;
-      }
-    } else {
-      if (highest !== curMax) {
-        if (value < arr[key + 1]) {
-          water += arr[key + 1] - value;
-        }
       }
     }
   });
+  curMax = arr[arr.length];
+  for ( let i = arr.length; i >= 0; i-- ) {
+    if ( rightToLeft ) {
+      if ( callback.key !== i ) {
+        if ( curMax > arr[i - 1] ) {
+          water += curMax - arr[i - 1];
+        } else if ( callback.key !== i - 1 ) {
+          curMax = arr[i - 1];
+        }
+      } else {
+        rightToLeft = false;
+        return water;
+      }
+    }
+  }
   return water;
 }
 
