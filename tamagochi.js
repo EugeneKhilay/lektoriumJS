@@ -8,7 +8,57 @@ function tamagochi(name) {
     toilet: 100
   }
 
+  let alive = true;
+
   function life() {
+
+    if ( alive ) {
+
+      if (stats.happiness <= 0) {
+        stats.food -= 10;
+        stats.sleep -= 10;
+      }
+
+      if (stats.food <= 0) {
+        stats.health -= 10;
+        stats.happiness -= 10;
+      } else if (stats.food >= 150 || stats.food < 0) {
+        alive = false;
+        alert(name + ' has died, cuz of overfeed :(');
+      }
+
+      if (stats.water <= 0) {
+        stats.health -= 10;
+        stats.happiness -= 10;
+      } else if (stats.water >= 150 || stats.water < 0) {
+        alive = false;
+        alert(name + ' has died, cuz of overdrink :(');
+      }
+
+      if (stats.sleep <= 0) {
+        stats.health -= 10;
+        stats.happiness -= 10;
+      }
+
+      if (stats.toilet <= 0) {
+        stats.health -= 10;
+        stats.happiness -= 10;
+      } else if (stats.toilet >= 150 || stats.toiler < 0) {
+        alive = false;
+        alert(name + ' has died, cuz of diarrhea :(');
+      }
+
+      if (stats.health <= 0 || !alive ) {
+        alive = false
+        alert(name + ' has died, cuz of low health :(');
+      }
+
+      console.log(stats);
+
+    }
+  }
+
+  function time () {
     stats.food -= 10;
     stats.water -= 10;
     stats.health -= 35;
@@ -16,56 +66,21 @@ function tamagochi(name) {
     stats.toilet -= 15;
     stats.sleep -= 10;
 
-    if (stats.happiness <= 0) {
-      stats.food -= 10;
-      stats.sleep -= 10;
-    }
-
-    if (stats.food <= 0) {
-      stats.health -= 10;
-      stats.happiness -= 10;
-    } else if (stats.food >= 150) {
-      alert(name + ' has died, cuz of overfeed :(');
-    }
-
-    if (stats.water <= 0) {
-      stats.health -= 10;
-      stats.happiness -= 10;
-    } else if (stats.food >= 150) {
-      alert(name + ' has died, cuz of overdrink :(');
-    }
-
-    if (stats.sleep <= 0) {
-      stats.health -= 10;
-      stats.happiness -= 10;
-    }
-
-    if (stats.toilet <= 0) {
-      stats.health -= 10;
-      stats.happiness -= 10;
-    } else if (stats.food >= 150) {
-      alert(name + ' has died, cuz of diarrhea :(');
-    }
-
-    if (stats.health <= 0) {
-      alert(name + ' has died, cuz of low health :(');
-    }
-
-    console.log(stats);
+    life();
 
     setTimeout(function () {
-      life()
+      time()
     }, 20000);
   }
 
-  life();
+  time();
 
   this.drink = function () {
     stats.water += 50;
     stats.health += 10;
     stats.toilet -= 10;
     stats.happiness += 5;
-    console.log(stats);
+    life();
   }
 
   this.eat = function () {
@@ -75,7 +90,7 @@ function tamagochi(name) {
     stats.water -= 5;
     stats.toilet -= 10;
     stats.sleep -= 10;
-    console.log(stats);
+    life();
   }
 
   this.play = function () {
@@ -85,7 +100,7 @@ function tamagochi(name) {
     stats.food -= 20;
     stats.sleep -= 20;
     stats.water -= 20;
-    console.log(stats);
+    life();
   }
 
   this.sleep = function () {
@@ -95,7 +110,7 @@ function tamagochi(name) {
     stats.food -= 20;
     stats.water -= 20;
     stats.toilet -= 20;
-    console.log(stats);
+    life();
   }
 
   this.poop = function () {
@@ -103,7 +118,7 @@ function tamagochi(name) {
     stats.happiness += 20;
     stats.food -= 10;
     stats.water -= 5;
-    console.log(stats);
+    life();
   }
 
   this.pill = function () {
@@ -112,6 +127,6 @@ function tamagochi(name) {
     stats.food -= 20;
     stats.happiness -= 20;
     stats.sleep -= 20;
-    console.log(stats);
+    life();
   }
 }
