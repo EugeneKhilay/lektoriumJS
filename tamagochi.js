@@ -1,4 +1,7 @@
-function tamagochi(name) {
+/**
+ * Exercise 3: Tamagotchi
+ */
+function tamagotchi(name) {
   let stats = {
     health: 100,
     happiness: 100,
@@ -43,7 +46,7 @@ function tamagochi(name) {
       if (stats.toilet <= 0) {
         stats.health -= 10;
         stats.happiness -= 10;
-      } else if (stats.toilet >= 150 || stats.toiler < 0) {
+      } else if (stats.toilet >= 150 || stats.toilet < 0) {
         alive = false;
         alert(name + ' has died, cuz of diarrhea :(');
       }
