@@ -1,9 +1,12 @@
-// let arr = [3, 0, -5, 1, 44, -12, 3, 0, 0, 1, 2, -3, -3, 2, 1, 4, -2-3-1];
+let arr = [3, 0, -5, 1, 44, -12, 3, 0, 0, 1, 2, -3, -3, 2, 1, 4, -2-3-1];
 // let arr = [-1,-8,-2];
 // let arr = [1,7,3];
-let arr = [1,undefined,3,5,-3];
+// let arr = [1,undefined,3,5,-3];
 // let arr = [1,NaN,3,5,-3];
 
+/**
+ * Exercise 2.2
+ * */
 function nMax(arr) {
   let maxNum = arr[0];
   for (let i = 1; i < arr.length; i++) {
@@ -47,9 +50,11 @@ function replaceMinMax(min, max) {
   return arr;
 }
 
-//Obj example
+/**
+ * Exercise 2.3
+ * */
 function returnObj (arr) {
-  var allInOne = new Object();
+  let allInOne = {};
   allInOne.max = nMax(arr);
   allInOne.min = nMin(arr);
   allInOne.sum = nSum(arr);
@@ -57,34 +62,21 @@ function returnObj (arr) {
   return allInOne;
 }
 
-// Callback function
+/**
+ * Exercise 2.4
+ * */
 function sumMinMax(arr, minCallback, maxCallback) {
   let k = minCallback(arr) + maxCallback(arr);
   return k;
 }
 
-// Arr to Obj
+/**
+ * Exercise 2.5
+ * */
 function returnObj(arr) {
   let r = {};
   arr.forEach(function (value, key) {
     r[key] = value;
   })
   return r;
-}
-
-// Pits
-let pits = [2, 1, 5, 0, 3, 4, 7, 2, 3, 1, 0];
-function getWater(arr) {
-  let highest = Math.max(...arr);
-  let water = 0;
-  let curMax = arr[0];
-  arr.forEach(function(value, key) {
-      if ( curMax < arr[key + 1] ) {
-        water += value - arr[key + 1];
-      } else if (value !== highest) {
-        curMax = arr[key + 1];
-      } else {
-        return water;
-      }
-  });
 }
